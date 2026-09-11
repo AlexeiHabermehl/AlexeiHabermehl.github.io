@@ -9,16 +9,16 @@
 
 main:
   - title: "Finance"
-    url: /publications/
+    url: /finance/
 
   - title: "Data Analytics"
-    url: /talks/    
+    url: /dataanalytics/    
 
   - title: "Other Projects"
-    url: /teaching/    
+    url: /other/    
     
   - title: "Resume"
-    url: /portfolio/
+    url: /resume/
         
   - title: "Blog Posts"
     url: /year-archive/
