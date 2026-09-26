@@ -1,0 +1,348 @@
+---
+title: "FinalReport_ITEC621"
+author: "Alexei Habermehl & Mohamed Khaled Attia"
+format: docx
+editor: visual
+execute:
+  echo: false
+  warning: false
+  message: false
+  output: false
+---
+
+## Predicting future price hikes to various commodities in local MENA market prices to optimize subsidy timing and resource allocation
+
+**Bottom line**
+
+-   There is a statistically significant correlation between the lagged global price, and local MENA market prices
+
+-   Commodity groups have the greatest predictive value on predicted prices of commodities
+
+-   The interaction model had the lowest RMSE, recording a statistically significant multiplicative effect of region vs commodity catergory
+
+**Business Case & Analytic Question**
+
+We are attempting to predict future price spikes for essential food commodities in local MENA markets to optimize subsidy timing and resource allocation. By utilizing a quantitative methodology to predict the market price of essential food staples (e.g., wheat, rice), we are interested in understanding the effect of seasonality, global price shocks, commodity type, and geographic region on price volatility. This model aims to maximize Predictive Power to serve as an early warning system for food insecurity.
+
+**Description of Dataset**
+
+Our dataset is sourced from the WFP's Global Food Prices dataset. With recordings stemming from 1990 to 2026, our dataset includes monthly recorded local market prices of various produce in USD from 98 countries. With over 400+ measured commodities, additional columns further break down broad catergories the produce items fall into. These recordings also cover local food prices in the Middle Eastern and North African regions.
+
+**Descriptive Analysis & OLS Testing**
+
+To understand the underlying data structure and variable relationships, we conducted visual and statistical time-series analyses. The first rendered plot shows average USD prices for items for MENA vs Non-MENA countries, with the second plot further aggregating this down by category. The visualization reveals general correlations between the prices regardless of produce category.
+
+Per the basic OLS test, all of the variables were significant—catergory, wfp_region, and global_lag_3, with p\<0.001, however, our models overall R\^2 value is \~0.05, implying it only explains 5% of the variance. Further variable analysis can be found in the coding.
+
+```{r}
+#| include: false
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(summarytools)
+setwd("~/Downloads")
+wfp_data <- read.table("WFP_Clean.csv", sep = ",", head = T)
+#Outcome Variable:
+#price_usd is the average retail price of the commodity
+plot(wfp_data$price_usd)
+
+#Predictive variables: 
+# Country
+table(wfp_data$country)
+freq(wfp_data$country)
+prop.table(table(wfp_data$country))
+#~98 countries with recorded data. Countries like Egypt, Lebanon, and Saudi Arabia have 1k+ recordings. 
+
+# Category
+table(wfp_data$category)
+#Broad produce catergories—cereals, meats, dairy, oils, etc. 
+
+# Commodity
+table(wfp_data$commodity)
+#There are...hundreds of commodities. Subset of catergory variable
+
+# Price flag
+table(wfp_data$price_flag)
+wfp_data <- wfp_data[wfp_data$price_flag %in% c("actual", "aggregate"), ]
+#Removed middle catergory. Price flag is actual vs aggregated usd price estimates. 
+
+# Price type
+table(wfp_data$price_type)
+#Altough it's binary, it's retail vs wholesale, with a 95% to a 5% proportion. 
+
+#Pre-processing for the OLS:
+#Removing dates with minimal recordings: 
+wfp_data <- wfp_data[!(wfp_data$date <= as.Date("2007-01-01")),]
+
+#Edit in the three month global lagged variable:
+#Lagged Calculations: 
+#First, let's create a time series of both the MENA price index, and the non-MENA price index: 
+global_ts <- wfp_data %>%
+  group_by(date) %>%
+  summarise(global_price = mean(price_usd, na.rm = TRUE))
+mena_ts <- wfp_data %>%
+  filter(wfp_region == "MENA") %>%
+  group_by(date) %>%
+  summarise(mena_price = mean(price_usd, na.rm = TRUE))
+
+ts_data <- left_join(global_ts, mena_ts, by = "date") %>%
+  arrange(date)
+ts_data <- ts_data %>% arrange(date)
+
+ts_data <- ts_data %>%
+  mutate(global_lag_3 = lag(global_price, 3))
+
+wfp_data <- wfp_data %>%
+  left_join(
+    ts_data %>% select(date, global_lag_3),
+    by = "date"
+  )
+
+# Fit baseline OLS regression model
+baseline_model <- lm(price_usd ~ wfp_region + category + global_lag_3, data = wfp_data)
+
+
+# Output model summary
+summary(baseline_model)
+#All predictors were significant,  however, R^2 was only ~.05.
+
+library(ggplot2)
+library(dplyr)
+#plot of USD prices of top commodities for MENA vs Non-MENA countries
+top_categories <- c(
+  "cereals and tubers",
+  "vegetables and fruits",
+  "meat, fish and eggs",
+  "pulses and nuts"
+)
+plot_data <- wfp_data %>%
+  mutate(date = as.Date(date)) %>%
+  filter(category %in% top_categories) %>%
+  group_by(date, category, wfp_region) %>%
+  summarise(
+    avg_price = mean(price_usd, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+ggplot(plot_data, aes(x = date, y = avg_price, color = wfp_region, group = wfp_region)) +
+  geom_line(linewidth = 0.8) +
+  facet_wrap(~ category, scales = "free_y") +
+  labs(
+    title = "Average USD Prices Over Time: MENA vs Non-MENA",
+    x = "Date",
+    y = "Average Price (USD)",
+    color = "Region"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "top",
+    strip.text = element_text(face = "bold")
+  )
+
+#Plot of simple MENA vs NON MENA average USD prices:
+plot_data_2 <- wfp_data %>%
+  mutate(date = as.Date(date)) %>%
+  group_by(date, wfp_region) %>%
+  summarise(
+    avg_price = mean(price_usd, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+ggplot(plot_data_2, aes(x = date, y = avg_price, color = wfp_region)) +
+  geom_line(linewidth = 1) +
+  labs(
+    title = "Average USD Prices Over Time: MENA vs Non-MENA",
+    x = "Date",
+    y = "Average Price (USD)",
+    color = "Region"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "top"
+  )
+  
+```
+
+**Individual Predictive Modeling Technology #1 (Mohamed Khaled Attia):**
+
+To further support our business goal to proactively predict food price spikes for humanitarian resource allocation, my individual modeling methodology focuses on the advanced Non-Linear OLS category. I engineered four new candidate model specifications to correct these violations and maximize predictive accuracy:
+
+*The Lagged Model*: Introduces a 3-month lag on local prices (captures serial dependence & provides realistic lead-time for humanitarian stakeholders.
+
+*The Interaction Model:* Tests compounding effects between location and specific commodity groups.
+
+*The Polynomial Model*: Utilizes a 3rd-degree curve to smoothly track non-linear agricultural harvest cycles.
+
+*The Log-Log Model*: Applies natural log transformations to evaluate price elasticity and stabilize variance.
+
+\*all four candidate specifications were evaluated against the original baseline model. The models were trained on the oldest 80% of the dataset, and their Out-of-Sample predictive accuracy (RMSE) was evaluated on the unseen newest 20% of the timeline.
+
+Per our RMSE table, candidate models vastly outperformed the original Deliverable 2 baseline when predicting future data. While all candidates achieved similarly exceptional Adjusted R-Squared scores during the training phase, the interaction model had the lowest RMSE (\~3.74).
+
+```{r}
+#| include: false
+
+#Lagged Model:
+wfp_data$Month_Num <- month(as.Date(wfp_data$date))
+
+# Create 3-month local lag (within country + commodity)
+wfp_data <- wfp_data %>%
+  arrange(country, commodity, date) %>%
+  group_by(country, commodity) %>%
+  mutate(Lagged_Local_Price_3M = lag(price_usd, 3)) %>%
+  ungroup()
+
+# 5. Chronological Train/Test Split (80/20)
+# Data must be sorted by time to prevent future data from leaking into the training set
+wfp_data <- wfp_data %>% arrange(date)
+split_index <- floor(0.8 * nrow(wfp_data))
+train_data <- wfp_data[1:split_index, ]
+test_data <- wfp_data[(split_index + 1):nrow(wfp_data), ]
+
+# Run lagged model
+model_lagged <- lm(price_usd ~ wfp_region + category + global_lag_3 + Lagged_Local_Price_3M, data = train_data)
+summary(model_lagged)
+
+#Interaction model
+wfp_data$Month <- month(as.Date(wfp_data$date))
+model_interaction <- lm(price_usd ~ wfp_region * category + Lagged_Local_Price_3M + global_lag_3, data = train_data)
+summary(model_interaction)
+
+#Log model
+model_log <- lm(log(price_usd) ~ log(Lagged_Local_Price_3M) + category + log(global_lag_3) + wfp_region, data = train_data)
+
+#Polynomial model
+model_poly <- lm(price_usd ~ poly(Month_Num, 3, raw = TRUE) + category + Lagged_Local_Price_3M + global_lag_3, data = train_data)
+summary(model_poly)
+
+#Comparing these models RMSE to original model:
+pred_baseline    <- predict(baseline_model, newdata = test_data)
+pred_lagged      <- predict(model_lagged, newdata = test_data)
+pred_interaction <- predict(model_interaction, newdata = test_data)
+pred_log         <- predict(model_log, newdata = test_data)
+pred_poly        <- predict(model_poly, newdata = test_data)
+pred_log <- exp(pred_log) #must convert back
+rmse <- function(actual, predicted) {sqrt(mean((actual - predicted)^2, na.rm = TRUE))}
+
+rmse_baseline    <- rmse(test_data$price_usd, pred_baseline)
+rmse_lagged      <- rmse(test_data$price_usd, pred_lagged)
+rmse_interaction <- rmse(test_data$price_usd, pred_interaction)
+rmse_log         <- rmse(test_data$price_usd, pred_log)
+rmse_poly        <- rmse(test_data$price_usd, pred_poly)
+
+rmse_results <- data.frame(
+  Model = c("Baseline", "Lagged", "Interaction", "Log-Log", "Polynomial"),
+  RMSE = c(rmse_baseline, rmse_lagged, rmse_interaction, rmse_log, rmse_poly)
+)
+
+rmse_results
+
+```
+
+**Individual Predictive Modeling Technology #2:**
+
+In order to proactively predict food price spikes for humanitarian resource allocation, I wanted to go down the tree path. This way, I could analyze variable importance, and preform additional black-box modeling. My four new canidate models are as follows:
+
+#Tree #1: Regression Tree: Simple, singular tree
+
+#Tree #2: Random Forest Tree (mtry =3)
+
+#Tree #3: Random Forest Tree (mtry =2)
+
+#Tree #4: Bagging Forest Model
+
+All of our canidate models RMSE's were marginally better than the baseline model's RMSE, all hanging \~13. The best tree model was the third tree—with a RMSE of \~13.02, this model preformed slightly better than the other models. However, none of these models preformed better than the aforementioned lagged model. Across all models, category seemed to be the most significant variable when it came to MSE % and inc node purity. Interestingly, the three month global lag variable consistently showed up as 3nd in %included in the MSE, however, it always seemed to score higher in inc node purity. Overall, these models should be used to analyze variable importance only.
+
+```{r}
+#| include: false
+# Tree Models
+library(dplyr)
+library(tree)
+library(randomForest)
+set.seed(123)
+
+# Clean data
+train_data <- train_data %>%
+  mutate(
+    category   = as.factor(category),
+    wfp_region = as.factor(wfp_region),
+    price_type = as.factor(price_type)
+  ) %>%
+  na.omit()
+
+test_data <- test_data %>%
+  mutate(
+    category   = as.factor(category),
+    wfp_region = as.factor(wfp_region),
+    price_type = as.factor(price_type)
+  ) %>%
+  na.omit()
+
+# Common formula
+form <- price_usd ~ category + global_lag_3 + wfp_region + price_type
+
+#Tree #1: Regression Tree
+tree.base <- tree(form, data = train_data)
+
+plot(tree.base)
+text(tree.base, pretty = 0)
+summary(tree.base)
+
+#Tree #2: Random Forest Tree (mtry =3)
+
+rf_restrict <- randomForest(form,data = train_data,mtry = 3, ntree=30,importance = TRUE)
+print(rf_restrict)
+plot(rf_restrict)
+varImpPlot(rf_restrict)
+
+#Tree #3:Random Forest Tree (mtry =2) 
+rf_small <- randomForest(form,data = train_data,mtry = 2, ntree=30,importance = TRUE)
+print(rf_small)
+plot(rf_small)
+varImpPlot(rf_small)
+
+#Tree #4: Bagging Forest Model
+
+bag_model <- randomForest(price_usd ~ category + global_lag_3 + wfp_region + price_type,data = train_data,mtry = 4,ntree=10,importance = T)
+print(bag_model)
+plot(bag_model)
+varImpPlot(bag_model)
+
+#Finding tree's RMSE: 
+test_data <- test_data %>%
+  mutate(
+    category   = factor(category, levels = levels(train_data$category)),
+    wfp_region = factor(wfp_region, levels = levels(train_data$wfp_region)),
+    price_type = factor(price_type, levels = levels(train_data$price_type))
+  )
+test_data <- test_data %>%
+  filter(
+    !is.na(category),
+    !is.na(wfp_region),
+    !is.na(price_type) )
+
+pred_rf_restrict <- predict(rf_restrict, test_data)
+pred_rf_small    <- predict(rf_small, test_data)
+pred_bag         <- predict(bag_model, test_data)
+pred_tree        <- predict(tree.base, test_data)
+rmse <- function(actual, predicted) {
+  sqrt(mean((actual - predicted)^2, na.rm = TRUE))
+}
+rmse_tree        <- rmse(test_data$price_usd, pred_tree)
+rmse_rf_restrict <- rmse(test_data$price_usd, pred_rf_restrict)
+rmse_rf_small    <- rmse(test_data$price_usd, pred_rf_small)
+rmse_bag         <- rmse(test_data$price_usd, pred_bag)
+
+
+
+```
+
+**Conclusion**
+
+Based upon the tested candidates, the lagged interaction GLM did the best, with a RMSE of \~3.7492, followed quickly by the non-interaction lagged GLM, with a RMSE of \~3.7497. Although the tree models did provide assistance in analyzing the top impactful variables on predicting local food prices, they weren't as statistically significant as the linear models from above. In summary, we have found statistically significant correlations between local MENA prices with lagged global prices, and have analyzed variable importance, aiding in predicting future price spikes for essential food commodities in local MENA markets to optimize subsidy timing and resource allocation.
+
+**Project Reflection**
+
+Generally speaking, this project has been one of the most challenging projects to work on—an iffy starting dataset, data that just couldn't showcase any substantial significance, and temporal variance was stripped from the start. For the majority of the time, we worked with a dataset that was artificially cleaned from the originally sourced WFP database, rending our models being completely unusable. From the getco, this caused major issues—variables we could use were cleaned off and information was just incorrect. Nonetheless, we were able to completely start from scratch, and manage to revive our project. Overall, I've learned to put serious time in the data exploration stage in a projects timeline. Small mistakes in the beginning can snowball quickly, and eventually get out of hand.
