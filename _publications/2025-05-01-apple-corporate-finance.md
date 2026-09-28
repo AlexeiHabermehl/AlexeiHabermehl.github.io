@@ -5,7 +5,7 @@ category: corporatefinance
 permalink: /finance/apple-corporate-finance
 excerpt: "Team analysis of Apple's governance, stockholders, risk, cost of capital, and investments, with a recommendation on its capital structure."
 date: 2025-05-01
-venue: "FIN-368, American University"
+venue: "American University"
 paperurl: "/files/AppleIncAnalysis.docx"
 ---
 
