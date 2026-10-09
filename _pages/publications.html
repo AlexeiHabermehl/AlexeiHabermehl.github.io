@@ -5,32 +5,76 @@ permalink: /finance/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
-
 {% include base_path %}
 
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
-    {% endfor %}
-  {% endfor %}
-{% else %}
+<p>My undergraduate degree in business administration had a finance focus: corporate valuation, investments, and fixed income. Below are reports from that coursework, followed by the skills each one demonstrates.</p>
+
+{% assign groups = "valuation|Valuation,corporatefinance|Corporate Finance,fixedincome|Fixed Income" | split: "," %}
+{% for group in groups %}
+  {% assign parts = group | split: "|" %}
+  <h2>{{ parts[1] }}</h2><hr />
   {% for post in site.publications reversed %}
-    {% include archive-single.html %}
+    {% if post.category == parts[0] %}
+      {% include archive-single.html %}
+    {% endif %}
   {% endfor %}
-{% endif %}
+{% endfor %}
 
+<h2>Skills, and where I used them</h2><hr />
 
+<table>
+  <thead>
+    <tr><th>Skill</th><th>Where I used it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>DCF valuation (free cash flow, terminal value, enterprise-to-equity bridge)</td><td><a href="/finance/agnico-eagle-valuation">Agnico-Eagle</a>, <a href="/finance/kohler-valuation">Kohler</a>, <a href="/finance/amtelecom-valuation">Amtelecom</a></td></tr>
+    <tr><td>Cost of capital (CAPM, WACC, re-levered beta)</td><td><a href="/finance/agnico-eagle-valuation">Agnico-Eagle</a>, <a href="/finance/kohler-valuation">Kohler</a>, <a href="/finance/apple-corporate-finance">Apple</a></td></tr>
+    <tr><td>Relative valuation (market multiples)</td><td><a href="/finance/kohler-valuation">Kohler</a></td></tr>
+    <tr><td>Real options valuation</td><td><a href="/finance/agnico-eagle-valuation">Agnico-Eagle</a></td></tr>
+    <tr><td>Industry and strategic analysis (key success factors, SWOT)</td><td><a href="/finance/amtelecom-valuation">Amtelecom</a></td></tr>
+    <tr><td>Corporate governance, risk and return, capital structure</td><td><a href="/finance/apple-corporate-finance">Apple</a></td></tr>
+    <tr><td>Credit analysis and bond valuation (ratings, covenants, spreads vs. Treasuries)</td><td><a href="/finance/jnj-fixed-income">Johnson &amp; Johnson</a></td></tr>
+  </tbody>
+</table>
 
+<h2>Full toolkit</h2><hr />
+
+<details>
+  <summary><strong>Corporate finance and valuation</strong></summary>
+  <p>Time value of money (annuities, loan amortization, retirement planning) · Capital budgeting with NPV, IRR, payback and profitability index, including when IRR breaks down · Cost of capital: CAPM, after-tax cost of debt, WACC, bottom-up beta · Ratio analysis and DuPont analysis of ROE · 3-statement and 5-year forecast models in Excel · DCF with exit-multiple or perpetuity-growth terminal value, plus sensitivity tables · Relative valuation with P/E, P/B, P/S and EV/EBITDA · M&amp;A and LBO basics: acquisition premiums, comparable companies, enterprise-to-equity value, deal structuring (earn-outs, covenants, asset purchases) · Optimal capital structure, dividend and buyback policy</p>
+</details>
+
+<details>
+  <summary><strong>Investments</strong></summary>
+  <p>Risk and return, Sharpe ratio, mean–variance optimization with Excel Solver · Options: payoffs, straddles, covered calls, protective puts, put–call parity, binomial and Black–Scholes pricing · Futures and forwards: basis, cost of carry, hedge ratios · Performance measurement: dollar- vs. time-weighted returns, tracking error, attribution · Alternative investments (private equity, venture capital, hedge funds) and investment policy statements</p>
+</details>
+
+<details>
+  <summary><strong>Fixed income</strong></summary>
+  <p>Bond pricing, YTM, yield to call and yield to worst · Macaulay and modified duration, convexity · Duration gap analysis for bank interest-rate risk, applied to the SVB case · Callable bonds: embedded options, binomial interest-rate lattices, negative convexity · Credit analysis with S&amp;P-style ratios, G-spread and Z-spread, secured vs. unsecured debt, Rule 144A offerings, make-whole calls · TIPS, century bonds, ESG and green bonds · Bond investment proposals and buy-side reports</p>
+</details>
+
+<details>
+  <summary><strong>International finance and hedging</strong></summary>
+  <p>Exchange-rate regimes and speculative attacks · Interest rate parity, forward rates, purchasing power parity · Transaction, translation and economic FX exposure · Financial vs. natural hedging, money-market hedges · Country-risk adjustments to cost of capital · Hedging FX and commodity exposure with forwards and futures</p>
+</details>
+
+<details>
+  <summary><strong>Financial markets and economics</strong></summary>
+  <p>The yield curve as a recession signal · Asset and credit bubbles, macroprudential policy · Central bank tools, inflation targeting vs. the dual mandate, bank capital, too-big-to-fail and moral hazard · Microeconomics: cost curves, breakeven and shutdown points, perfect competition, price elasticity</p>
+</details>
+
+<details>
+  <summary><strong>Operations and statistics</strong></summary>
+  <p>Little's Law, process analysis, bottlenecks, capacity and utilization · Queueing models and pooling · Linear programming with Solver · Newsvendor inventory decisions · Descriptive statistics, hypothesis testing, one-way ANOVA, Levene's test, Tukey–Kramer · Databases, data warehouses and data marts; descriptive vs. predictive vs. prescriptive analytics</p>
+</details>
+
+<details>
+  <summary><strong>Strategy, management and law</strong></summary>
+  <p>PESTEL, SWOT, VRIO, Porter's Five Forces · Business vs. corporate strategy · Motivation and leadership theories · HR and labor basics · Marketing: segmentation, targeting, positioning, the 4Ps · Commerce Clause and anti-commandeering cases · Employment law case briefs · Business ethics case analysis</p>
+</details>
+
+<details>
+  <summary><strong>Tools</strong></summary>
+  <p>Advanced Excel (NPV/IRR functions, data tables, Solver, Goal Seek) · Bloomberg Terminal and Bloomberg Market Concepts certificate · Refinitiv and Mergent · R for financial analysis (credit scoring, panel regression, random forests) · Case writing, memos, analyst reports and presentations</p>
+</details>

@@ -7,12 +7,19 @@ redirect_from:
   - /about.html
 ---
 
-I am a graduate student, currently studying Data Analytics & AI at at American University, where Im currently working on expanding my data analytics and machine learning knowledge.
+I started out valuing companies and now build models from data. Both come down to the same job: turning messy numbers into a decision someone can act on.
 
-As an undergraduate, I had a more quantitative finance focus, focusing mostly on portfolio management, corporate valuation, and derivative securities. Here, I learned extensively on how to write, process, and understand financial portfolios. Using Bloomberg terminals, I got comfortable with the financial intricacies related to the financial world.
+I'm a graduate student in Data Analytics & AI at American University's Kogod School of Business.
 
-Additionally, I minored in Chinese, further pursuing my mastery in Mandarin. Despite what it may seem, learning the actual language was only a fraction of the benefit with this minor---being immersed in a completely foreign language with a group of people in the same boat was incredibly team building. I also felt like it really made me learn and master how to study. It also helped me process the world in a different way, gave me an abillity to see the world in a different perspective, and more.
+As an undergraduate in business administration, I focused on quantitative finance: portfolio management, corporate valuation, and derivative securities. I valued companies with discounted cash flows and market multiples, wrote bond recommendations, and worked with financial data on the Bloomberg Terminal.
 
-On this website, you'll be able to find and search various research projects I've done either myself, or with classmates. I've split this up between my undergraduate financial-related stuff, and more.
-======
+In my master's program, I moved into data analytics and machine learning: regression, classification, and tree-based models like random forests and XGBoost, along with the work around them, such as cleaning data, checking a model's assumptions, and writing up results for decision-makers.
 
+I also minored in Chinese. Learning the language was only part of the benefit. Being immersed in Mandarin alongside classmates who were all starting from the same place taught me how to study, and gave me a different way of looking at problems.
+
+## Where to look
+
+- **[Finance](/finance/)**: company valuations, a corporate finance review of Apple, and a bond recommendation for Johnson & Johnson.
+- **[Data Analytics](/dataanalytics/)**: analytics projects on campus dining, Spotify tracks, and Metro fare evasion.
+- **[Leadership](/leadership/)**: founding American University's chapter of Tri-Alpha, the first-generation honor society.
+- **[Resume](/resume/)**: education, experience, and skills.

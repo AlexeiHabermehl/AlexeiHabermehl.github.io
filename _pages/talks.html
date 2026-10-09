@@ -5,12 +5,68 @@ permalink: /dataanalytics/
 author_profile: true
 ---
 
-{% if site.talkmap_link == true %}
+{% include base_path %}
 
-<p style="text-decoration:underline;"><a href="/talkmap.html">See a map of all the places I've given a talk!</a></p>
+<p>In my master's program I moved from finance into data analytics and machine learning. Below are projects from that coursework, followed by the methods each one uses.</p>
 
-{% endif %}
+<!-- "How I do data analytics" video goes here. Upload it to YouTube (unlisted is fine), then replace VIDEO_ID and remove these comment markers:
+<h2>How I do data analytics</h2><hr />
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+  <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="How I do data analytics" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>
+</div>
+-->
+
+<h2>Projects</h2><hr />
 
 {% for post in site.talks reversed %}
   {% include archive-single-talk.html %}
 {% endfor %}
+
+<h2>Methods, and where I used them</h2><hr />
+
+<table>
+  <thead>
+    <tr><th>Method</th><th>Where I used it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Data cleaning and filtering</td><td><a href="/dataanalytics/spotify-popularity">Spotify</a>, <a href="/dataanalytics/wmata-fare-evasion">Metro fare evasion</a></td></tr>
+    <tr><td>Descriptive analysis and visualization</td><td><a href="/dataanalytics/au-dining-analytics">AU Dining</a>, <a href="/dataanalytics/spotify-popularity">Spotify</a>, <a href="/dataanalytics/wmata-fare-evasion">Metro fare evasion</a></td></tr>
+    <tr><td>Multiple regression with dummy variables</td><td><a href="/dataanalytics/au-dining-analytics">AU Dining</a>, <a href="/dataanalytics/wmata-fare-evasion">Metro fare evasion</a></td></tr>
+    <tr><td>Comparing effects across groups</td><td><a href="/dataanalytics/spotify-popularity">Spotify</a> (by genre)</td></tr>
+    <tr><td>Time series and forecasting</td><td><a href="/dataanalytics/au-dining-analytics">AU Dining</a></td></tr>
+    <tr><td>Combining data sources</td><td><a href="/dataanalytics/au-dining-analytics">AU Dining</a> (transactions, nutrition, weather)</td></tr>
+    <tr><td>Writing findings for decision-makers</td><td><a href="/dataanalytics/spotify-popularity">Spotify</a>, <a href="/dataanalytics/wmata-fare-evasion">Metro fare evasion</a></td></tr>
+  </tbody>
+</table>
+
+<h2>Full toolkit</h2><hr />
+
+<details>
+  <summary><strong>Descriptive statistics and inference</strong></summary>
+  <p>Summary statistics · Histograms, boxplots, QQ plots · Correlation · Confidence intervals · z and t tests (one-sample, paired, independent) · Proportion tests · Chi-square and Cramér's V · Power analysis · ANOVA</p>
+</details>
+
+<details>
+  <summary><strong>Regression and diagnostics</strong></summary>
+  <p>Simple and multiple linear regression · Dummy variables and interactions · Log transformations · R² and RMSE · Matrix regression · Residual analysis · Heteroskedasticity and WLS · Multicollinearity (VIF) · Outliers · Stepwise selection and AIC</p>
+</details>
+
+<details>
+  <summary><strong>Resampling and regularization</strong></summary>
+  <p>Train/test split · Cross-validation (LOOCV, k-fold) · Bootstrap and jackknife · Ridge and lasso · PCA, PCR, PLS · Bias–variance tradeoff · Splines and polynomials</p>
+</details>
+
+<details>
+  <summary><strong>Classification, trees and unsupervised learning</strong></summary>
+  <p>Logistic regression · LDA and QDA · KNN · Confusion matrices and thresholds · Class imbalance · Decision trees and pruning · Bagging and random forests · XGBoost · SVM · k-means and hierarchical clustering · Association rules</p>
+</details>
+
+<details>
+  <summary><strong>Time series</strong></summary>
+  <p>Exponential smoothing and Holt-Winters · Lags and avoiding leakage</p>
+</details>
+
+<details>
+  <summary><strong>Databases and BI</strong></summary>
+  <p>ER and relational modeling · SQL · Transactions and data warehouses · NoSQL and vector databases · Tableau dashboards, LOD expressions and parameters</p>
+</details>
