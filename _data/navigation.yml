@@ -14,9 +14,5 @@ main:
   - title: "Leadership"
     url: /leadership/
 
-  - title: "Resume"
-    url: /resume/
-
-  # Uncomment once the CV page is written
-  # - title: "CV"
-  #   url: /cv/
+  - title: "Curriculum Vitae"
+    url: /cv/
