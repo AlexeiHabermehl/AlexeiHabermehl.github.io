@@ -19,8 +19,10 @@ author_profile: true
   .cv-entry ul { margin: 0.35em 0 0; }
   .cv-entry li { margin-bottom: 0.15em; }
   .cv-table td:last-child, .cv-table th:last-child { text-align: right; white-space: nowrap; }
+  .cv-skills { display: grid; grid-template-columns: 11em 1fr; gap: 0.5em 1em; }
+  .cv-skills dt, .cv-skills dd { float: none; width: auto; margin: 0; padding: 0; }
   .cv-skills dt { font-weight: bold; }
-  .cv-skills dd { margin: 0 0 0.6em 0; }
+  @media (max-width: 600px) { .cv-skills { grid-template-columns: 1fr; gap: 0.15em; } .cv-skills dd { margin-bottom: 0.6em; } }
 </style>
 
 <p class="cv-updated">Last updated: October 2026</p>
