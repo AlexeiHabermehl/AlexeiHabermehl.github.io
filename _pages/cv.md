@@ -18,7 +18,9 @@ author_profile: true
   .cv-entry p { margin: 0; }
   .cv-entry ul { margin: 0.35em 0 0; }
   .cv-entry li { margin-bottom: 0.15em; }
-  .cv-table td:last-child, .cv-table th:last-child { text-align: right; white-space: nowrap; }
+  .cv-term { margin: 0 0 0.9em 1.5em; }
+  .cv-term-name { font-weight: bold; margin: 0; }
+  .cv-term ul { margin: 0.2em 0 0; }
   .cv-skills { display: grid; grid-template-columns: 11em 1fr; gap: 0.5em 1em; }
   .cv-skills dt, .cv-skills dd { float: none; width: auto; margin: 0; padding: 0; }
   .cv-skills dt { font-weight: bold; }
@@ -67,40 +69,64 @@ author_profile: true
 
 <div class="cv-entry">
   <div class="cv-row"><strong>Teaching Assistant</strong><span class="cv-date">Spring 2024 – Fall 2025</span></div>
-  <p class="cv-sub">American University, Washington, D.C. · 16 course sections across 4 courses</p>
+  <p class="cv-sub">American University, Washington, D.C.</p>
   <ul>
     <li>Revised syllabi and final examinations for multiple courses</li>
     <li>Led class workshops on locating and evaluating high-quality research literature</li>
   </ul>
 </div>
 
-<table class="cv-table">
-  <thead>
-    <tr><th>Course</th><th>Terms</th><th>Sections</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Management &amp; Organizational Behavior</td>
-      <td>Fall 2025 (3), Summer 2025, Spring 2025, Fall 2024 (4), Summer 2024, Spring 2024</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <td>Managing Human Capital</td>
-      <td>Spring 2025, Spring 2024</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>Leading High-Performance Teams</td>
-      <td>Spring 2025, Spring 2024</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>Managing People &amp; Organizations</td>
-      <td>Fall 2025</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
+<div class="cv-term">
+  <p class="cv-term-name">Fall 2025</p>
+  <ul>
+    <li>Management &amp; Organizational Behavior</li>
+    <li>Management &amp; Organizational Behavior</li>
+    <li>Management &amp; Organizational Behavior</li>
+    <li>Managing People &amp; Organizations</li>
+  </ul>
+</div>
+
+<div class="cv-term">
+  <p class="cv-term-name">Summer 2025</p>
+  <ul>
+    <li>Management &amp; Organizational Behavior</li>
+  </ul>
+</div>
+
+<div class="cv-term">
+  <p class="cv-term-name">Spring 2025</p>
+  <ul>
+    <li>Managing Human Capital</li>
+    <li>Leading High-Performance Teams</li>
+    <li>Management &amp; Organizational Behavior</li>
+  </ul>
+</div>
+
+<div class="cv-term">
+  <p class="cv-term-name">Fall 2024</p>
+  <ul>
+    <li>Management &amp; Organizational Behavior</li>
+    <li>Management &amp; Organizational Behavior</li>
+    <li>Management &amp; Organizational Behavior</li>
+    <li>Management &amp; Organizational Behavior</li>
+  </ul>
+</div>
+
+<div class="cv-term">
+  <p class="cv-term-name">Summer 2024</p>
+  <ul>
+    <li>Management &amp; Organizational Behavior</li>
+  </ul>
+</div>
+
+<div class="cv-term">
+  <p class="cv-term-name">Spring 2024</p>
+  <ul>
+    <li>Management &amp; Organizational Behavior</li>
+    <li>Leading High-Performance Teams</li>
+    <li>Managing Human Capital</li>
+  </ul>
+</div>
 
 <h2>Professional Experience</h2><hr />
 
