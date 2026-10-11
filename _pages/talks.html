@@ -7,7 +7,7 @@ author_profile: true
 
 {% include base_path %}
 
-<p>In my master's program I moved from finance into data analytics and machine learning. Below are projects from that coursework, followed by the methods each one uses.</p>
+<p>In my master's program I moved from finance into data analytics and machine learning. Below are projects from that coursework.</p>
 
 <!-- "How I do data analytics" video goes here. Upload it to YouTube (unlisted is fine), then replace VIDEO_ID and remove these comment markers:
 <h2>How I do data analytics</h2><hr />
@@ -18,26 +18,9 @@ author_profile: true
 
 <h2>Projects</h2><hr />
 
-{% for post in site.talks reversed %}
+{% for post in site.talks %}
   {% include archive-single-talk.html %}
 {% endfor %}
-
-<h2>Methods, and where I used them</h2><hr />
-
-<table>
-  <thead>
-    <tr><th>Method</th><th>Where I used it</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Data cleaning and filtering</td><td><a href="/dataanalytics/spotify-popularity">Spotify</a>, <a href="/dataanalytics/wmata-fare-evasion">Metro fare evasion</a></td></tr>
-    <tr><td>Descriptive analysis and visualization</td><td><a href="/dataanalytics/au-dining-analytics">AU Dining</a>, <a href="/dataanalytics/spotify-popularity">Spotify</a>, <a href="/dataanalytics/wmata-fare-evasion">Metro fare evasion</a></td></tr>
-    <tr><td>Multiple regression with dummy variables</td><td><a href="/dataanalytics/au-dining-analytics">AU Dining</a>, <a href="/dataanalytics/wmata-fare-evasion">Metro fare evasion</a></td></tr>
-    <tr><td>Comparing effects across groups</td><td><a href="/dataanalytics/spotify-popularity">Spotify</a> (by genre)</td></tr>
-    <tr><td>Time series and forecasting</td><td><a href="/dataanalytics/au-dining-analytics">AU Dining</a></td></tr>
-    <tr><td>Combining data sources</td><td><a href="/dataanalytics/au-dining-analytics">AU Dining</a> (transactions, nutrition, weather)</td></tr>
-    <tr><td>Writing findings for decision-makers</td><td><a href="/dataanalytics/spotify-popularity">Spotify</a>, <a href="/dataanalytics/wmata-fare-evasion">Metro fare evasion</a></td></tr>
-  </tbody>
-</table>
 
 <h2>Full toolkit</h2><hr />
 
