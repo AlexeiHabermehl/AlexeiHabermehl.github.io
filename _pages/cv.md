@@ -46,12 +46,12 @@ author_profile: true
 
 <div class="cv-entry">
   <div class="cv-row"><strong>Research Assistant</strong><span class="cv-date">2023–2026</span></div>
-  <p class="cv-sub">American University, Washington, D.C. · Supervisor: Dr. Meredith Burnett</p>
+  <p class="cv-sub">American University, Washington, D.C. · Mentor: Dr. Meredith Burnett</p>
   <ul>
     <li>Assisted with research in organizational behavior and human resources (OB/HR) scholarship</li>
-    <li>Conducted quantitative data analysis, with a focus on race and gender dynamics</li>
+    <li>Aided quantitative data analysis, with a focus on race and gender dynamics</li>
     <li>Contributed to conceptual development, including framework development and hypothesis testing</li>
-    <li>Proofread and edited manuscripts to top-journal standards</li>
+    <li>Proofread and edited paper drafts to top-journal standards</li>
   </ul>
 </div>
 
@@ -71,7 +71,7 @@ author_profile: true
   <div class="cv-row"><strong>Teaching Assistant</strong><span class="cv-date">Spring 2024 – Fall 2025</span></div>
   <p class="cv-sub">American University, Washington, D.C.</p>
   <ul>
-    <li>Revised syllabi and final examinations for multiple courses</li>
+    <li>Graded assignments, organized course assignments for students, and proctored exams</li>
     <li>Led class workshops on locating and evaluating high-quality research literature</li>
   </ul>
 </div>
