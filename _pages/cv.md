@@ -42,7 +42,7 @@ author_profile: true
   <p>Minor in Chinese Language</p>
 </div>
 
-<h2>Research Experience</h2><hr />
+<h2>Experience</h2><hr />
 
 <div class="cv-entry">
   <div class="cv-row"><strong>Research Assistant</strong><span class="cv-date">2023–2026</span></div>
@@ -62,6 +62,15 @@ author_profile: true
     <li>Managed concurrent research pipelines for approximately ten faculty principal investigators and 400+ participants per semester</li>
     <li>Oversaw scheduling, protocol adherence, and data collection from recruitment through delivery</li>
     <li>Managed a high-volume research inbox serving principal investigators, faculty, and study participants</li>
+  </ul>
+</div>
+
+<div class="cv-entry">
+  <div class="cv-row"><strong>Financial Consultant Intern</strong><span class="cv-date">Summer 2023</span></div>
+  <p class="cv-sub">Washington, D.C.</p>
+  <ul>
+    <li>Advised a subsidiary of a large technology corporation</li>
+    <li>Led the redesign of the company’s name and logo</li>
   </ul>
 </div>
 
@@ -125,17 +134,6 @@ author_profile: true
     <li>Management &amp; Organizational Behavior</li>
     <li>Leading High-Performance Teams</li>
     <li>Managing Human Capital</li>
-  </ul>
-</div>
-
-<h2>Professional Experience</h2><hr />
-
-<div class="cv-entry">
-  <div class="cv-row"><strong>Financial Consultant Intern</strong><span class="cv-date">Summer 2023</span></div>
-  <p class="cv-sub">Washington, D.C.</p>
-  <ul>
-    <li>Advised a subsidiary of a large technology corporation</li>
-    <li>Led the redesign of the company’s name and logo</li>
   </ul>
 </div>
 
