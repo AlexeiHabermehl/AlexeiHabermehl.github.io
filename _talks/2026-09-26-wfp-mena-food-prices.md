@@ -22,4 +22,4 @@ Built predictive models of local market prices for essential food commodities (e
 
 **Team:** Mohamed Khaled Attia, Alexei Habermehl
 
-[View the report source (Quarto)](/files/FinalProject621.qmd)
+[Read the full report (PDF)](/files/ITEC621_FinalReport.pdf)
