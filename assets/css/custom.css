@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
+
+/* ===== New typefaces: Classic (serif headings) ===== */
+body, .masthead__inner-wrap { font-family: "Source Sans 3", -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+h1, h2, h3, h4, .page__title, .author__name { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; letter-spacing: -0.01em; }
+
+/* ===== Accent color: Navy ===== */
+:root {
+  --global-base-color: #1f4e79;
+  --global-link-color: #1f5f9e;
+  --global-link-color-hover: #163d63;
+  --global-link-color-visited: #4f6f92;
+  --global-masthead-link-color-hover: #1f4e79;
+}
+html[data-theme="dark"] {
+  --global-base-color: #7fb2e5;
+  --global-link-color: #8cbcec;
+  --global-link-color-hover: #b9d6f4;
+  --global-link-color-visited: #a7c0dc;
+  --global-masthead-link-color-hover: #7fb2e5;
+}
+
+/* ===== Sharper header ===== */
+.masthead { box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06); }
+.masthead__menu-item--lg a { font-weight: 700; color: var(--global-base-color); }
+.greedy-nav .visible-links a:before { height: 2px; background: var(--global-base-color); }
+.masthead__menu-item.selected a,
+.masthead__menu-item.selected a:hover { color: var(--global-base-color); border-bottom-color: var(--global-base-color); }
+.greedy-nav .visible-links #theme-toggle a:before,
+.greedy-nav .visible-links .masthead__menu-item--lg a:before { display: none; }
+
+/* ===== Profile sidebar ===== */
+.author__avatar img { padding: 0; border: 4px solid var(--global-bg-color); box-shadow: 0 0 0 2px var(--global-base-color), 0 8px 20px rgba(0, 0, 0, 0.15); }
+.author__name { font-size: 1.3em; margin-top: 0.3em; }
+.author__bio { color: var(--global-base-color); font-weight: 600; font-size: 0.72em; letter-spacing: 0.08em; text-transform: uppercase; }
+.author__urls li { padding: 0.15em 0; }
+.author__urls i { color: var(--global-base-color); }
+
+/* ===== Bigger title and intro ===== */
+.page__title { font-size: 2em; }
+.page__title::after { content: ""; display: block; width: 3rem; height: 3px; margin-top: 0.45em; background: var(--global-base-color); }
+.page__content > p:first-of-type { font-size: 1.15em; line-height: 1.6; }
+
+/* ===== Accent resume button ===== */
+.page__content .resume-band { background: color-mix(in srgb, var(--global-base-color) 6%, var(--global-bg-color)); border-color: color-mix(in srgb, var(--global-base-color) 25%, var(--global-bg-color)); }
+.page__content .resume-text h2 { color: var(--global-base-color); }
+.page__content .resume-btn { background: var(--global-base-color); border-color: var(--global-base-color); color: var(--global-bg-color) !important; border-radius: 4px; }
+.page__content .resume-btn:hover { background: var(--global-link-color-hover); border-color: var(--global-link-color-hover); color: var(--global-bg-color) !important; }
+
+/* ===== Softer background and deeper dark mode ===== */
+:root {
+  --global-bg-color: #f8f9fb;
+  --global-footer-bg-color: #eef1f4;
+  --global-border-color: #e2e6ea;
+}
+html[data-theme="dark"] {
+  --global-bg-color: #1e2227;
+  --global-footer-bg-color: #262b31;
+  --global-border-color: #3a4149;
+  --global-dark-border-color: #3a4149;
+  --global-text-color: #e6e8eb;
+  --global-masthead-link-color: #e6e8eb;
+}
