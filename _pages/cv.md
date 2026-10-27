@@ -142,6 +142,12 @@ author_profile: true
 <div class="cv-entry">
   <div class="cv-row"><strong>Founding President</strong><span class="cv-date">2023–2025</span></div>
   <p class="cv-sub">Tri-Alpha First-Generation Honor Society, American University Chapter</p>
+  <ul>
+    <li>Founded AU's first first-generation honor society; co-wrote its constitution and led it through university registration</li>
+    <li>Designed the executive board's structure and ran weekly meetings with assigned task owners, deadlines, and progress check-ins</li>
+    <li>Built cross-campus partnerships with the First Generation Student Union, the Office of Inclusive Excellence, Lambda Chi, and other organizations</li>
+    <li>Delivered the keynote address at the chapter's first induction ceremony</li>
+  </ul>
 </div>
 
 <h2>Honors &amp; Awards</h2><hr />
