@@ -37,6 +37,7 @@ html[data-theme="dark"] {
 .author__bio { color: var(--global-base-color); font-weight: 600; font-size: 0.72em; letter-spacing: 0.08em; text-transform: uppercase; }
 .author__urls li { padding: 0.15em 0; }
 .author__urls i { color: var(--global-base-color); }
+.author__urls li a { padding-top: 0; padding-bottom: 0; margin-bottom: 0; } /* link rows same height as plain-text rows */
 
 /* ===== Bigger title and intro ===== */
 .page__title { font-size: 2em; }
